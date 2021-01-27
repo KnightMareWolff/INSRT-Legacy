@@ -1,0 +1,36 @@
+#include "IVK_Sistema.h"
+
+CIVKSistema::CIVKSistema()
+{
+    VkResult IVK_Retorno;
+
+    //Recupera numero de extensões
+    IVK_Retorno = vkEnumerateInstanceExtensionProperties( nullptr, &IVK_QtdExtensoes, nullptr );
+    if( (IVK_Retorno != VK_SUCCESS) ||
+        (IVK_QtdExtensoes == 0) )
+    {
+      qWarning() << "Impossivel Obter numero de extensões.";
+    }
+
+    //Alimenta o vetor de propriedades de extensão
+    IVK_ExtensoesSistema.resize( IVK_QtdExtensoes );
+    IVK_Retorno = vkEnumerateInstanceExtensionProperties( nullptr, &IVK_QtdExtensoes, IVK_ExtensoesSistema.data() );
+    if( (IVK_Retorno != VK_SUCCESS) ||
+        (IVK_QtdExtensoes == 0) )
+    {
+      qWarning() << "Impossivel Enumerar as extensões obtidas.";
+    }
+
+    //Informacoes para inicializacao do sistema    
+    IVK_InfoSistema.sType              = VK_STRUCTURE_TYPE_APPLICATION_INFO;
+    IVK_InfoSistema.pNext              = NULL;
+    IVK_InfoSistema.pApplicationName   = "Insane RT Framework";
+    IVK_InfoSistema.applicationVersion = VK_MAKE_VERSION( 1, 0, 0 );
+    IVK_InfoSistema.pEngineName        = "INSVK";
+    IVK_InfoSistema.engineVersion      = VK_MAKE_VERSION( 1, 0, 0 );
+    IVK_InfoSistema.apiVersion         = VK_MAKE_VERSION( 1, 0, 0 );
+    
+    
+    
+
+}

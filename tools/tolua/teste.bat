@@ -1,0 +1,1 @@
+tolua -H ObjetosExportados.h -o ObjetosExportados.cpp ObjetosExportados.pkg 
